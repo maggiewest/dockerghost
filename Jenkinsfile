@@ -1,5 +1,7 @@
-agent {
-    dockerfile {
-        filename 'Dockerfile'
+pipeline {
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+        }
     }
 }
