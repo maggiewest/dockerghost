@@ -31,16 +31,7 @@ pipeline {
 		    echo "Finished test"
 		    sh "rm -rf $DEPLOY_DIR"
 	    }
-	    /* success {
-            	slackSend channel: "#pipeline-testing", 
-		color: "good", 
-		message: "Deployed application SUCCESS. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> :yay:"
-	    }
-	    failure {
-		slackSend channel: "#pipeline-testing",
-		color: "danger",
-		message: "Deploy FAILED. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
-	    }*/
+	   
     }
 }
 
