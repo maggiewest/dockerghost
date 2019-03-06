@@ -6,7 +6,7 @@ pipeline {
 	environment {
 		HOST = "ec2-18-222-105-140.us-east-2.compute.amazonaws.com"
 		DEPLOY_DIR = "dockerghost"
-		TEST_DIR = "tests"
+		//TEST_DIR = "tests"
 	}
 
 	stages {
