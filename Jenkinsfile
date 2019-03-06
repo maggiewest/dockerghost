@@ -37,6 +37,7 @@ node {
         
     }
 }
+
 def notifySlack(String buildStatus = 'STARTED') {
     // Build status of null means success.
     buildStatus = buildStatus ?: 'SUCCESS'
@@ -54,7 +55,7 @@ def notifySlack(String buildStatus = 'STARTED') {
     }
 
     def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
-    slackSend channel: "#pipeline-testing", color: color, message: msg)
+    slackSend channel: "#pipeline-testing", color: color, message: msg
     //slackSend(color: color, message: msg)
 }
 
