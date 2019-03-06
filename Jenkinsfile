@@ -21,7 +21,7 @@ pipeline {
 				sh """
 					mkdir $TEST_DIR
 					sudo docker build -t my-app .
-					sudo docker run --docker run my-appname my-app --rm -v $WORKSPACE/$TEST_DIR:/$TEST_DIR 
+					sudo docker run --docker run my-app 
 				"""
 			}
 		}
