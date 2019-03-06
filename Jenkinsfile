@@ -32,10 +32,10 @@ pipeline {
             		sh "rm -rf $DEPLOY_DIR"
        	 	}
 	   	success {
-		    slackSend channel: "#wpscan", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+		    slackSend channel: "pipeline-testing", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 	    	}
 	    	failure {
-		    slackSend channel: "#wpscan", message: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+		    slackSend channel: "pipeline-testing", message: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 	    	}
     	}
  }
