@@ -21,7 +21,7 @@ pipeline {
 				sh """
 					mkdir $TEST_DIR
 					sudo docker build -t my-app .
-					sudo docker run --name my-app --rm -v $WORKSPACE/$TEST_DIR:/$TEST_DIR --entrypoint 'nosetests' my-app test_service.py --with-xunit --xunit-file=/$TEST_DIR/nosetests.xml
+					sudo docker run --docker run my-appname my-app --rm -v $WORKSPACE/$TEST_DIR:/$TEST_DIR 
 				"""
 			}
 		}
