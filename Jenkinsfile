@@ -12,16 +12,19 @@ node {
         checkout scm
     }
     stage('Test') {
-        def testContainer = docker.image('ghostinspector:test-runner-node')
+        def ghostimg = docker.image('ghostinspector:test-runner-node')
 
-        def testContainer = docker.image('node:4.6')
-        testContainer.pull()
+        //def testContainer = docker.image('node:4.6')
+        ghostimg.pull()
+        
     }
     
     try {
-        notifySlack('STARTED')
+        notifyBuild('STARTED')
         stage('Running Tests') {
-            def testContainer = docker.image('node:4.6')
+            //def testContainer = docker.image('node:4.6')
+            //testContainer.pull()
+            def testContainer = docker.image('ghostinspector:test-runner-node')
             testContainer.pull()
             //  testContainer.inside {
             // sh 'npm install --only=dev'
@@ -31,14 +34,16 @@ node {
         }
     }
     catch (Exception err) {
-     currentBuild.result = "FAILURE";
-     def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
-       
-        
+        currentBuild.result = "FAILURE";
+        throw err
     }
+    finally {
+    // Success or failure, always send notifications
+    notifyBuild(currentBuild.result)
+  }
 }
 
-def notifySlack(String buildStatus = 'STARTED') {
+def notifyBuild(String buildStatus = 'STARTED') {
     // Build status of null means success.
     buildStatus = buildStatus ?: 'SUCCESS'
 
