@@ -29,7 +29,7 @@ pipeline {
 
 	post {
         	always {
-            		sh "rm -rf $DEPLOY_DIR $TEST_DIR"
+            		sh "rm -rf $DEPLOY_DIR"
        	 	}
 	   	success {
 		    slackSend channel: "#wpscan", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
