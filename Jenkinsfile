@@ -26,14 +26,19 @@ pipeline {
 		}
        
             }
-    post {
-	    always {
-		    echo "Finished test"
-		    sh "rm -rf $DEPLOY_DIR"
-	    }
-	   
-    }
-}
+
+	post {
+        	always {
+            		sh "rm -rf $DEPLOY_DIR $TEST_DIR"
+       	 	}
+	   	success {
+		    slackSend channel: "#wpscan", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+	    	}
+	    	failure {
+		    slackSend channel: "#wpscan", message: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+	    	}
+    	}
+ }
 
 
 
