@@ -15,7 +15,7 @@ pipeline {
 				checkout scm
 			}
 		}
-        stage('Unit Tests') {
+        	stage('GI Tests') {
 			steps {
 				echo "Starting Tests"
 				sh """
@@ -24,29 +24,7 @@ pipeline {
 				"""
 			}
 		}
-        stage('Prepare for Deployment') {
-			steps {
-				sh "mkdir $DEPLOY_DIR"
-				sh "rsync -vaz --exclude=$DEPLOY_DIR . $DEPLOY_DIR"
-				sh "rm -rf $DEPLOY_DIR/.git"
-			}
-		}
-        stage('Deploy') {
-                    steps {
-                        timeout(time: 30, unit: 'SECONDS'){
-                            input(message:'Are you sure you want to deploy to Production?')
-                        }
-                        echo "Deploying to $HOST"
-                        sh "scp -r $DEPLOY_DIR $HOST:/home/jenkins/"
-                        sh """
-                            # Just used this as a one-off to accept the host key on the first run.
-                            ssh -o StrictHostKeyChecking=no $HOST /bin/true
-
-                            ssh $HOST chmod +x $DEPLOY_DIR/*.sh $DEPLOY_DIR/*.py
-                            ssh $HOST ./$DEPLOY_DIR/run.sh
-                        """
-                    }
-                }
+       
             }
     post {
 	    always {
