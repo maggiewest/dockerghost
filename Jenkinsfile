@@ -19,7 +19,6 @@ pipeline {
 			steps {
 				echo "Starting Tests"
 				sh """
-					mkdir $TEST_DIR
 					sudo docker build -t my-app .
 					sudo docker run --docker run my-app 
 				"""
