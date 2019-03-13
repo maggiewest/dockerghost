@@ -1,5 +1,5 @@
 FROM ghostinspector/test-runner-node
-
+USER root
 # Copy your node app
 COPY . .
 
