@@ -19,8 +19,8 @@ pipeline {
 			steps {
 				echo "Starting Tests"
 				sh """
-					sudo docker build -t my-app .
-					sudo docker run my-app 
+					docker build -t my-app .
+					docker run my-app 
 				"""
 			}
 		}
