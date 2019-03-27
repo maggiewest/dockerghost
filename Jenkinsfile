@@ -6,7 +6,6 @@ pipeline {
 	environment {
 		HOST = "ec2-18-222-105-140.us-east-2.compute.amazonaws.com"
 		DEPLOY_DIR = "dockerghost"
-		//TEST_DIR = "tests"
 	}
 
 	stages {
@@ -30,7 +29,10 @@ pipeline {
 	post {
         	always {
             		sh "rm -rf $DEPLOY_DIR"
-       	 	}
+			emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                	recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+               		subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+                   	 	}
 	   	success {
 		    slackSend channel: "pipeline-testing", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 	    	}
