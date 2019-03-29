@@ -33,6 +33,9 @@ pipeline {
 		}
 	   	success {
 		    slackSend channel: "pipeline-testing", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+			mail to: 'nyu429@nyu.edu',
+             	    subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+                    body: "Something is RIGHT with ${env.BUILD_URL}"
 	    	}
 	    	failure {
 		    slackSend channel: "pipeline-testing", message: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
