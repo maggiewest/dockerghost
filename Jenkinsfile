@@ -29,7 +29,9 @@ pipeline {
 	post {
         	always {
             		sh "rm -rf $DEPLOY_DIR"
-			
+			emailext subject: 'Demo Test',
+			body: 'Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)' 
+                        to: 'nyu429@nyu.edu'
                    	 	}
 	   	success {
 		    slackSend channel: "pipeline-testing", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
