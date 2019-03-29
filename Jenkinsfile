@@ -29,9 +29,7 @@ pipeline {
 	post {
         	always {
             		sh "rm -rf $DEPLOY_DIR"
-			emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                	recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-               		subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+			
                    	 	}
 	   	success {
 		    slackSend channel: "pipeline-testing", message: "Build Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
