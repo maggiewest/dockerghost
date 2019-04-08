@@ -4,7 +4,7 @@ pipeline {
 	agent any 
 
 	environment {
-		HOST = "ec2-18-222-105-140.us-east-2.compute.amazonaws.com"
+		/*HOST = "ec2-18-222-105-140.us-east-2.compute.amazonaws.com"*/
 		DEPLOY_DIR = "dockerghost"
 	}
 
