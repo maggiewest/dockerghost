@@ -17,7 +17,7 @@ http.createServer(function (req, res) {
 	  	<a id="logo" href="#Home">Devops Demo</a>
 	  </nav>
 	  <div class="headline header">
-	  	<h1>Hello from our local web app</h1>
+	  	<h1>Hello Hello Hello</h1>
 	  </div>
 
 
