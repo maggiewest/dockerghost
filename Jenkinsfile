@@ -18,12 +18,14 @@ pipeline {
 		}
         	stage('GI Tests') {
 			steps {
+				try {
 				
-				echo "Starting Tests"
-				sh """
-					sudo docker build -t my-app .
-					sudo docker run my-app 
-				"""
+					echo "Starting Tests"
+					sh """
+						sudo docker build -t my-app .
+						sudo docker run my-app 
+					"""
+				}
 			}
 		}
        
