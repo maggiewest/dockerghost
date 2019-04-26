@@ -35,13 +35,13 @@ pipeline {
 			
 		}
 	   	success {
-		    slackSend channel: "pipeline-testing", message: "Deployed application SUCCESS. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n ",
+		    slackSend channel: "#pipeline-testing", message: "Deployed application SUCCESS. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n ",
 			mail to: 'nyu429@nyu.edu',
              	    subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
                     body: " ${env.BUILD_URL}"
 	    	}
 	    	failure {
-		    slackSend channel: "pipeline-testing", message: "Deployed application FAILURE. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n ",
+		    slackSend channel: "#pipeline-testing", message: "Deployed application FAILURE. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n ",
 	    	    mail to: 'nyu429@nyu.edu',
              	    subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                     body: "Something is wrong with ${env.BUILD_URL}"
