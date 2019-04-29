@@ -6,7 +6,7 @@ pipeline {
 	environment {
 		/*HOST = "ec2-18-222-105-140.us-east-2.compute.amazonaws.com"*/
 		DEPLOY_DIR = "dockerghost"
-		commitChangeset = sh(returnStdout: true, script: 'git log -1 --pretty=%B')
+		/*commitChangeset = sh(returnStdout: true, script: 'git log -1 --pretty=%B')*/
 
 	}
 
@@ -38,11 +38,11 @@ pipeline {
 			
 		}
 	   	success {
-		    slackSend channel: 'pipeline-testing', message: "Deployed application SUCCESS. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
+		    slackSend channel: 'pipeline-testing', message: "Deployed application SUCCESS. \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
 		    
 	    	}
 	    	failure {
-		    slackSend channel: "pipeline-testing", message: "Deployed application FAILURE. \n ${commitChangeset} See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
+		    slackSend channel: "pipeline-testing", message: "Deployed application FAILURE. \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
 	    	   
 		}
     	}
